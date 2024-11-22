@@ -3,25 +3,16 @@ from sklearn.metrics import accuracy_score, classification_report
 from train import SimpleNN
 import pandas as pd
 import numpy as np
-import torch.nn as nn
+import random
 
-# class SimpleNN(nn.Module):
-#     def __init__(self, input_size):
-#         super(SimpleNN, self).__init__()
-#         self.fc1 = nn.Linear(input_size, 256)  # Fully connected layer 1
-#         self.relu = nn.ReLU()  # Activation function
-#         self.fc2 = nn.Linear(256, 64)  # Fully connected layer 2
-#         self.fc3 = nn.Linear(64, 1)  # Output layer (binary classification)
-#         self.sigmoid = nn.Sigmoid()  # Sigmoid for probability
-#
-#     def forward(self, x):
-#         x = self.fc1(x)
-#         x = self.relu(x)
-#         x = self.fc2(x)
-#         x = self.relu(x)
-#         x = self.fc3(x)
-#         x = self.sigmoid(x)
-#         return x
+# Set random seed for reproducibility
+def set_seed(seed):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+
 
 def load_data(file_path):
     # Read the dataset without headers
@@ -66,6 +57,7 @@ def test_model(test_file_path, model_path):
 
 # Entry point for the script
 if __name__ == "__main__":
+    set_seed(37)
     # Path to the test dataset and saved model
     test_file_path = "dataset/adult/augmented_test_data.csv"
     model_path = "models/simple_nn_model.pth"

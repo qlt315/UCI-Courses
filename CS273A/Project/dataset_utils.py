@@ -9,6 +9,7 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 from tensorflow.keras.layers import Embedding
 from sklearn.feature_selection import RFE
 from sklearn.linear_model import LogisticRegression
+
 def load_data(file_path):
     # Read the dataset without headers
     data = pd.read_csv(file_path, header = None,

@@ -1,4 +1,16 @@
 import dataset_utils as util
+import random
+import numpy as np
+import torch
+
+# Set random seed for reproducibility
+def set_seed(seed):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+
 
 def process_train_data(file_path):
     # 1. Load data
@@ -50,6 +62,7 @@ def process_test_data(file_path, std_scaler, norm_scaler, selected_features):
     return x, y
 
 if __name__ == "__main__":
+    set_seed(37)
     train_file_path = "dataset/adult/train_data.csv"
     x_train, x_eval, y_train, y_eval, std_scaler, norm_scaler, selected_features = process_train_data(train_file_path)
     # Export the train and eval data

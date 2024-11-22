@@ -6,7 +6,15 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
+import random
 
+# Set random seed for reproducibility
+def set_seed(seed):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
 
 # Define a simple neural network model
 class SimpleNN(nn.Module):
@@ -131,4 +139,5 @@ def main():
 
 
 if __name__ == "__main__":
+    set_seed(37)
     main()

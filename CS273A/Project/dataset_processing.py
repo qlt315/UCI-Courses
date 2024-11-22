@@ -8,7 +8,7 @@ def process_train_data(file_path):
     x, y = util.clean_data(x,y)
 
     # 3. Feature selection (select top K features based on feature importance)
-    x, selected_features = util.feature_selection(x, y, k=10)
+    x, selected_features = util.feature_selection(x, y, k=12)
 
 
     # 3. Data standardization (mean=0, std=1) for numerical features
@@ -18,7 +18,7 @@ def process_train_data(file_path):
     x, norm_scaler = util.normalize_train_data(x)
 
     # 5. Data augmentation (increase training data size via augmentation techniques)
-    x, y = util.data_augmentation(x, y)
+    # x, y = util.data_augmentation(x, y)
 
     # 6. Split the data into training and evaluation sets (80/20 split)
     x_train, x_eval, y_train, y_eval = util.split_train_data(x, y)

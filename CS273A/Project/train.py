@@ -51,21 +51,19 @@ def main():
     x_train, y_train = load_data(train_file_path)
     x_eval, y_eval = load_data(eval_file_path)
 
-
-    print(x_train[0:10])
-    print(y_train[0:10])
     # Convert labels to float32
-    y_eval = y_eval.astype(np.float32)
     y_train = y_train.astype(np.float32)
     x_train = x_train.astype(np.float32)
+    x_eval = x_eval.astype(np.float32)
+    y_eval = y_eval.astype(np.float32)
+    x_eval_array = x_eval.to_numpy()
+    x_train_array = x_train.to_numpy()
 
-    print(type(x_train))  # 应该是 pd.DataFrame 或 np.ndarray
-    print(x_train.shape)  # 应输出 (num_samples, num_features)
     # Convert data to PyTorch tensors
-    x_train_tensor = torch.tensor(x_train, dtype=torch.float32)
+    x_train_tensor = torch.tensor(x_train_array, dtype=torch.float32)
     y_train_tensor = torch.tensor(y_train, dtype=torch.float32).unsqueeze(
         1)  # Add a dimension for binary classification
-    x_val_tensor = torch.tensor(x_eval, dtype=torch.float32)
+    x_val_tensor = torch.tensor(x_eval_array, dtype=torch.float32)
     y_val_tensor = torch.tensor(y_eval, dtype=torch.float32).unsqueeze(1)
 
     # Create DataLoader for batching
@@ -83,7 +81,7 @@ def main():
     optimizer = optim.Adam(model.parameters(), lr=0.001)
 
     # Training loop
-    num_epochs = 10
+    num_epochs = 50
     for epoch in range(num_epochs):
         # Training phase
         model.train()
@@ -124,8 +122,8 @@ def main():
             f"Train Loss: {train_loss / len(train_loader):.4f}, Val Loss: {val_loss / len(val_loader):.4f}, Val Accuracy: {val_accuracy:.4f}")
 
     # Save the trained model
-    torch.save(model.state_dict(), "simple_nn_model.pth")
-    print("Model saved to 'simple_nn_model.pth'")
+    torch.save(model.state_dict(), "models/simple_nn_model.pth")
+    print("Model saved to 'models/simple_nn_model.pth'")
 
     # Print final classification report
     print("\nFinal Classification Report on Validation Set:")

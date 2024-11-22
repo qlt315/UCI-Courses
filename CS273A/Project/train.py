@@ -81,7 +81,7 @@ def main():
     optimizer = optim.Adam(model.parameters(), lr=0.001)
 
     # Training loop
-    num_epochs = 50
+    num_epochs = 10
     for epoch in range(num_epochs):
         # Training phase
         model.train()

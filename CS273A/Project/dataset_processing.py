@@ -3,7 +3,7 @@ import random
 import numpy as np
 import torch
 
-
+categorical_columns = ['workclass', 'education', 'marital-status', 'occupation', 'relationship', 'race']
 # Set random seed for reproducibility
 def set_seed(seed):
     random.seed(seed)
@@ -14,7 +14,7 @@ def set_seed(seed):
 
 
 def process_train_data(file_path):
-    categorical_columns = ['workclass', 'education', 'marital-status', 'occupation', 'relationship', 'race']
+
     # 1. Load data
     x, y = util.load_data(file_path)
 
@@ -57,8 +57,8 @@ def process_test_data(file_path, std_scaler, norm_scaler, selected_features):
     x = x[selected_features]
 
     # Standardize/Normalize the data using the scaler fitted on training data
-    x = util.standardize_test_data(x, std_scaler)
-    x = util.normalize_test_data(x, norm_scaler)
+    x = util.standardize_test_data(x, std_scaler,categorical_columns)
+    x = util.normalize_test_data(x, norm_scaler,categorical_columns)
 
     return x, y
 

@@ -169,6 +169,17 @@ def standardize_test_data(x, scaler, categorical_columns):
 
     return x_standardized
 
+def normalize_test_data(x, scaler, categorical_columns):
+    # Identify non-categorical columns
+    non_categorical_columns = [col for col in x.columns if col not in categorical_columns]
+
+    # Normalize only non-categorical columns
+    x_normalized = x.copy()
+    x_normalized[non_categorical_columns] = scaler.transform(x[non_categorical_columns])
+
+    return x_normalized
+
+
 def data_augmentation(x, y):
     noise_factor = 0.1
     x_augmented = x + noise_factor * np.random.randn(*x.shape)

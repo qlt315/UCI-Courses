@@ -7,7 +7,6 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 import random
-
 # Set random seed for reproducibility
 def set_seed(seed):
     random.seed(seed)
@@ -34,7 +33,6 @@ class SimpleNN(nn.Module):
         x = self.fc3(x)
         x = self.sigmoid(x)
         return x
-
 
 # Load dataset
 def load_data(file_path):

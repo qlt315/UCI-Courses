@@ -67,8 +67,8 @@ def clean_data(x, y):
     # Identify missing values represented as '?'
     missing_symbol = ' ?'
     missing_counts = (x == missing_symbol).sum()
-    # print("\n Missing Values Represented by '?':")
-    # print(missing_counts)
+    print("\n Missing Values Represented by '?':")
+    print(missing_counts)
 
     # Replace '?' with np.nan for standard missing value handling
     x = x.replace(missing_symbol, np.nan)
